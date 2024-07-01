@@ -74,8 +74,8 @@ def display_newdata():
 def feedback():
     if request.method=='POST':
         # return request.form
-        fb(request.form)
-        return f"<h1> Feedback Saved <u>{request.form} </u> </h1>"
+        result= fb(request.form)
+        return f"<h1> Feedback Saved <u>{result} </u> </h1>"
     return redirect('/')
     
 if __name__ == "__main__":
