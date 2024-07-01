@@ -1,5 +1,6 @@
 from flask_pymongo import PyMongo
 from flask import Flask,redirect,url_for,render_template,request,session
+import smtplib
 # from werkzeug.security import generate_password_hash, check_password_hash
 import csv 
 from secrets import token_urlsafe
@@ -15,10 +16,14 @@ fields = [ 'name' , 'email' , 'feedback']
 
 def fb(mydict):
     try:
-        with open('data.csv', 'a') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fields)
-            writer.writerow(mydict)
-            return True
+        my_mail = 'msnithin84@gmail.com'
+        password = 'msjf zjih mdlb dvbe'
+        connection = smtplib.SMTP("smtp.gmail.com",587)
+        connection.starttls()
+        connection.login(my_mail,password)
+        connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..')
+        connection.close()
+        return True,"Thank You"
     except Exception as e:
         return e
 
