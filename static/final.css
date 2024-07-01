@@ -44,3 +44,25 @@ button:hover {
     box-shadow: black 5px 5px 10px;
     background-color: #27408b;
 }
+@media (max-width: 600px) {
+    body {
+        align-content: flex-start;
+        justify-content: flex-start;
+    }
+    @media (max-width: 600px) {
+        body {
+            align-content: flex-start;
+            justify-content: flex-start;
+        }
+
+        .card {
+            width: 100%;
+            height: auto;
+            font-size: 14px; /* Adjust the font size accordingly */
+        }
+    }
+    .card {
+        width: 100%;
+        height: auto;
+    }
+}

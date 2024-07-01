@@ -22,10 +22,12 @@ def fb(mydict):
         connection.starttls()
         connection.login(my_mail,password)
         connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..')
+        connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}thank you for your feedback on codedpad... from Nithin M S')
+        
         connection.close()
         return True,"Thank You"
     except Exception as e:
-        return e
+        return False,e
 
 # store_password= []
 
@@ -85,7 +87,7 @@ def feedback():
     if request.method=='POST':
         # return request.form
         result= fb(request.form)
-        return f"<h1> Feedback Saved <u>{result} </u> </h1>"
+        return render_template('feedback.html', change=result)
     return redirect('/')
     
 if __name__ == "__main__":

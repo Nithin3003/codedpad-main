@@ -1,0 +1,29 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='final.css') }}">
+<link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSns7Aie3TqiJrFEU4RKv48DUFFlumaNB6Q&s" type="image/png">
+{% if change %}
+<center>
+    <div class="card">
+        <br><br> 
+        <h1> Feedback Saved</h1> 
+        <b>{result} </b>
+        <br><br>
+    </div>
+    <a href='/'><button>Back</button></a>
+ </center>
+    
+        {% else %}
+        <div class="card">
+        <center><h1> Feedback not Saved</h1> <br> 
+            <h4> Try again </h4> 
+            <br>
+            error: <b>{result} </b>
+            <br>
+        
+    </div>
+        <a href='/'><button>Back</button></a>
+    </center>
+     {% endif %}
+{% endblock%}

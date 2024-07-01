@@ -181,30 +181,7 @@ background-color: rgb(33, 95, 230);
 color: white;
 font-size: medium;
 }
-@media (max-width:750px) {
-    *{
-        font-weight: 100;
-    }
-    .card,.card2{
-        padding: 0;
-    }
-    .card,.card2:hover{
-        width: 40vw;
-        height: auto;
-    }
-    .submit-button:hover{
-        font-weight: 700;
-        background-color: #0aa70f;
-    }
-    .input-field{
-        font-weight:400;
-        font-size: small;
-    }
-    #heading{
-        padding: 0;
-        margin: 20;
-    }
-}
+
 
 .form1 button {
 width: 165px;
@@ -238,3 +215,39 @@ background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,94,247
 transition: 1s;
 }
 
+@media (max-width: 500px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .form1 {
+        height: auto;
+    }
+    
+    .title {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+    }
+    
+    .description {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .form1 div {
+        margin: 0.5rem 2rem;
+    }
+    
+    .form1 div input {
+        width: 100%;
+    }
+    
+    .card {
+        width: 100%;
+    }
+    
+    .button3 {
+        height: 6vh;
+    }
+    
+}
