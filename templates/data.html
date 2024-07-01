@@ -1,0 +1,36 @@
+{% extends 'layout.html'%}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='data.css') }}">
+
+
+<body>
+
+    <center>
+        <h1>Coded pad</h1>
+        <hr>
+        <form action="/final" method="POST">
+
+            {% if data=="" %}
+            <div class="text">
+                <textarea name="data" placeholder="Enter some data " class="data"></textarea>
+
+            </div>
+            {% else %}
+
+            <div class="text">
+                <textarea name="data" placeholder="Enter some data " class="data">{{ data }}</textarea>
+
+            </div>
+            {% endif %}
+            <div class="btns">
+                <a href="/" >Back </a>
+                <button type="submit">Save</button>
+            </div>
+
+
+        </form>
+
+    </center>
+
+    {% endblock %}

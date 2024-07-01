@@ -1,0 +1,45 @@
+{% extends 'layout.html'%} 
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+<center>
+
+
+<form class="form1"action="{{ url_for('display_data') }}" method="post" >
+    <span class="title">Welcome to Your Data App.</span>
+    <p class="description">Enter your password to access your data or create a new entry.</p>
+    <div class="field2">
+        <i class="fa-solid fa-lock fa-beat-fade"></i>
+        <input placeholder="Password" type="text" name="password" id="email-address">
+        <button>
+            Open
+          </button>
+
+    </div>
+</form>
+
+<div class="card">
+    <div class="card2">
+        <form class="form" action="/feedback" method="post" autocomplete="off"> 
+            <p id="heading">Feedback Form</p>
+            <div class="field">
+                <i class="fa-solid fa-user fa-xl" style="padding-left:.5rem ;" ></i>
+                <input type="text"name="name" autocomplete="on" required class="input-field" placeholder="Enter your name" autocomplete="off" />
+            </div>
+            <div class="field">
+                <i class="fa-solid fa-envelope fa-xl " style="padding-left:.5rem ;"></i>
+                <input type="email" autocomplete="off" name="email" class="input-field" placeholder="Enter yout email" >
+            </div>
+            <div class="field">
+                <i class="fa-solid fa-comment fa-xl" style="padding-left:.5rem ;"></i>
+                <textarea name="feedback" class="input-field " required style="font-size: large;" placeholder="Enter feedback" ></textarea>
+            </div>
+            <button type="submit" class="button3">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+</center>
+{% endblock %}

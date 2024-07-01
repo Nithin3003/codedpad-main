@@ -1,0 +1,22 @@
+{% extends 'layout.html'%}
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='final.css') }}">
+
+<body>
+    
+
+    {% if change %}
+    <div class="card">
+        <h1>Succefully saved changes/no change made . </h1>
+        
+    </div>
+    {% else %}
+    <div class="card">
+        <h1>New data saved !....</h1>
+    </div>
+    {% endif %}
+   <br><br>
+    <a href="/"><button> Go back </button></a>
+</body>
+
+{% endblock %}
