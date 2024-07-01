@@ -14,9 +14,14 @@ coded = mongo.db.codedpad
 fields = [ 'name' , 'email' , 'feedback']
 
 def fb(mydict):
-    with open('data.csv', 'a') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fields)
-        writer.writerow(mydict)
+    try:
+        with open('data.csv', 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fields)
+            writer.writerow(mydict)
+            return True
+    except Exception as e:
+        return e
+
 # store_password= []
 
 # store_csv('password1', 'hi')
