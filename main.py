@@ -22,10 +22,10 @@ def fb(mydict):
         connection.starttls()
         connection.login(my_mail,password)
         connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..')
-        connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}thank you for your feedback on codedpad... from Nithin M S')
+        connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S')
         
         connection.close()
-        return True,"Thank You"
+        return True,f"Thank You {mydict['name']}"
     except Exception as e:
         return False,e
 

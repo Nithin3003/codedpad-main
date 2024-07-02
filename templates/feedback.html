@@ -1,16 +1,23 @@
 {% extends 'layout.html'%}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>coded pad</title>
 
-{% block content %}
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='final.css') }}">
 <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSns7Aie3TqiJrFEU4RKv48DUFFlumaNB6Q&s" type="image/png">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='final.css') }}">
+<!-- <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQXyiaxuD13Sg6zKL1IfLmQmCp3qQp1caq4w&s" type="image/png"> -->
+
+{% endblock %}
+{% block content %}
 {% if change %}
 <center>
     <div class="card">
         <br><br> 
         <h1> Feedback Saved</h1> 
-        <b>{result} </b>
-        <br><br>
+        <b>{{change }} </b>
     </div>
+    <br><br><br>
     <a href='/'><button>Back</button></a>
  </center>
     
@@ -19,10 +26,10 @@
         <center><h1> Feedback not Saved</h1> <br> 
             <h4> Try again </h4> 
             <br>
-            error: <b>{result} </b>
-            <br>
+            error: <b>{{ change }} </b>
+        </div>
+            <br><br><br>
         
-    </div>
         <a href='/'><button>Back</button></a>
     </center>
      {% endif %}

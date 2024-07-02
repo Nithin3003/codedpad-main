@@ -1,8 +1,15 @@
 {% extends 'layout.html'%}
-
-{% block content %}
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='data.css') }}">
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>coded pad</title>
 <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSns7Aie3TqiJrFEU4RKv48DUFFlumaNB6Q&s" type="image/png">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='data.css') }}">
+
+
+{% endblock %}
+{% block content %}
+<!-- <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSns7Aie3TqiJrFEU4RKv48DUFFlumaNB6Q&s" type="image/png"> -->
 
 
 <body>
