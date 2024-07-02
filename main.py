@@ -16,8 +16,8 @@ fields = [ 'name' , 'email' , 'feedback']
 
 def fb(mydict):
     try:
-        my_mail = 'msnithin84@gmail.com'
-        password = 'msjf zjih mdlb dvbe'
+        my_mail = '30nithinms@gmail.com'
+        password = 'mvjp jpbl dnvu xmlc'
         connection = smtplib.SMTP("smtp.gmail.com",587)
         connection.starttls()
         connection.login(my_mail,password)
@@ -27,7 +27,7 @@ def fb(mydict):
         connection.close()
         return True,f"Thank You {mydict['name']}"
     except Exception as e:
-        return False,e
+        return False
 
 # store_password= []
 
