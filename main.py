@@ -4,6 +4,7 @@ import smtplib
 # from werkzeug.security import generate_password_hash, check_password_hash
 import csv 
 from secrets import token_urlsafe
+import datetime
 app= Flask(__name__) 
 
 
@@ -14,6 +15,13 @@ mongo = PyMongo(app)
 coded = mongo.db.codedpad
 fields = [ 'name' , 'email' , 'feedback']
 
+
+
+def curr_date():
+    date = datetime.datetime.now()
+    return str(x)[:-10]
+
+
 def fb(mydict):
     try:
         my_mail = '30nithinms@gmail.com'
@@ -21,7 +29,7 @@ def fb(mydict):
         connection = smtplib.SMTP("smtp.gmail.com",587)
         connection.starttls()
         connection.login(my_mail,password)
-        connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..')
+        connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..\n\t {curr_date()}')
         connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S')
         
         connection.close()
@@ -35,6 +43,7 @@ def fb(mydict):
 def check_password(password):
     data = coded.find_one({'password' : password })
     return data if data else False
+
 
 def check_newdata():
     data = coded.find_one({'password' : session['newpassword']})
@@ -68,13 +77,13 @@ def display_newdata():
         value = request.form['data']
         old_data  =check_newdata()
         if old_data and session['newpassword'] == old_data['password']:  # if old data with/without changes
-            coded.find_one_and_update({'password' :session['newpassword']}, { '$set':{ 'data': value}}) #session['newpassword'] = None
+            coded.find_one_and_update({'update_time': curr_date(),'password' :session['newpassword']}, { '$set':{ 'data': value}}) #session['newpassword'] = None
 
             return render_template('final.html' ,change = True)
             # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
 
         else:#new data / password 
-            coded.insert_one({'password' :session['newpassword'],'data': value  } )
+            coded.insert_one({'time': curr_date() ,'password' :session['newpassword'],'data': value  } )
             # store_password.clear
             # session['newpassword'] = None
             return render_template('final.html' ,change = False)
