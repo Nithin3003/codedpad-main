@@ -4,7 +4,8 @@ import smtplib
 # from werkzeug.security import generate_password_hash, check_password_hash
 import csv 
 from secrets import token_urlsafe
-import datetime
+from pytz import timezone 
+from datetime import datetime
 app= Flask(__name__) 
 
 
@@ -18,8 +19,8 @@ fields = [ 'name' , 'email' , 'feedback']
 
 
 def curr_date():
-    date = datetime.datetime.now()
-    return str(x)[:-10]
+    date = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S.%f')
+    return str(date)[:-10] if date else ""
 
 
 def fb(mydict):
@@ -30,7 +31,7 @@ def fb(mydict):
         connection.starttls()
         connection.login(my_mail,password)
         connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..\n\t {curr_date()}')
-        connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S')
+        connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S\n\t {curr_date()}')
         
         connection.close()
         return True,f"Thank You {mydict['name']}"
@@ -52,7 +53,7 @@ def check_newdata():
 
 @app.route('/')
 def home():
-    return render_template("home.html")
+    return render_template("home.html" , date=curr_date())
 
 
 @app.route("/display", methods=['POST', 'GET'])
@@ -77,7 +78,7 @@ def display_newdata():
         value = request.form['data']
         old_data  =check_newdata()
         if old_data and session['newpassword'] == old_data['password']:  # if old data with/without changes
-            coded.find_one_and_update({'update_time': curr_date(),'password' :session['newpassword']}, { '$set':{ 'data': value}}) #session['newpassword'] = None
+            coded.find_one_and_update({'password' :session['newpassword']}, { '$set':{ 'data': value}}) #session['newpassword'] = None
 
             return render_template('final.html' ,change = True)
             # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
