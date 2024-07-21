@@ -61,6 +61,12 @@ def ads():
     return send_from_directory("static", "ads.txt")
 
 
+
+@app.route("/robots.txt")
+def robots_dot_txt():
+    return "User-agent: *\nDisallow: /"
+
+
 @app.route("/display", methods=['POST', 'GET'])
 def display_data():
     if request.method == 'POST':
