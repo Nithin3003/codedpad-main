@@ -1,27 +1,15 @@
 {% extends 'layout.html'%}
-<head>
+{% block head %} 
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='final.css') }}">
+    <link rel="stylesheet" href="../static/final.css">
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSns7Aie3TqiJrFEU4RKv48DUFFlumaNB6Q&s" type="image/png">
     <meta name="google-adsense-account" content="ca-pub-1921778862002515">
-</head>
+{% endblock %}
+
 {% block content %}
 
 
-<body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921778862002515"
-     crossorigin="anonymous"></script>
-<!-- codedpad_ads -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1921778862002515"
-     data-ad-slot="4184214321"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-    {% if change %}
+{% if change %}
     <div class="card">
         <h1>Succefully saved changes/no change made . </h1>
         
@@ -33,6 +21,17 @@
     {% endif %}
    <br><br>
     <a href="/"><button> Go back </button></a>
-</body>
-
-{% endblock %}
+    <!-- ads  -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921778862002515"
+     crossorigin="anonymous"></script>
+    <!-- codedpad_ads -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1921778862002515"
+     data-ad-slot="4184214321"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+    <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    {% endblock %}
