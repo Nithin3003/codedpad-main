@@ -1,5 +1,5 @@
 from flask_pymongo import PyMongo
-from flask import Flask,redirect,url_for,render_template,request,session
+from flask import Flask,redirect,url_for,render_template,request,session,send_from_directory
 import smtplib
 # from werkzeug.security import generate_password_hash, check_password_hash
 import csv 
@@ -54,6 +54,11 @@ def check_newdata():
 @app.route('/')
 def home():
     return render_template("home.html" , date=curr_date())
+
+
+@app.route('/ads.txt')
+def ads():
+    return send_from_directory("static", "ads.txt")
 
 
 @app.route("/display", methods=['POST', 'GET'])
