@@ -6,10 +6,11 @@ import csv
 from secrets import token_urlsafe
 from pytz import timezone 
 from datetime import datetime
+import os
 app= Flask(__name__) 
 
 
-app.config['MONGO_URI'] = "mongodb+srv://msnithin84:Nithin@cluster0.wob2cfi.mongodb.net/coded"
+app.config['MONGO_URI'] = os.environ.get('url')
 app.config['SECRET_KEY'] = token_urlsafe(32)
 
 mongo = PyMongo(app)
@@ -25,13 +26,14 @@ def curr_date():
 
 def fb(mydict):
     try:
-        my_mail = '30nithinms@gmail.com'
+        form_mail ='hack@gmail.com'
+        my_mail = os.environ.get('mail')
         password = 'mvjp jpbl dnvu xmlc'
         connection = smtplib.SMTP("smtp.gmail.com",587)
         connection.starttls()
         connection.login(my_mail,password)
-        connection.sendmail(from_addr='hack@gmail.com' , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..\n\t {curr_date()}')
-        connection.sendmail(from_addr='hack@gmail.com' , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S\n\t {curr_date()}')
+        connection.sendmail( form_mail , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..\n\t {curr_date()}')
+        connection.sendmail(from_mail , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S\n\t {curr_date()}')
         
         connection.close()
         return True,f"Thank You {mydict['name']}"
@@ -88,18 +90,23 @@ def display_newdata():
     if request.method =='POST':
         value = request.form['data']
         old_data  =check_newdata()
-        if old_data and session['newpassword'] == old_data['password']:  # if old data with/without changes
-            coded.find_one_and_update({'password' :session['newpassword']}, { '$set':{ 'data': value}}) #session['newpassword'] = None
+        try:
+            if old_data and session['newpassword'] == old_data['password']:  # if old data with/without changes
+                coded.find_one_and_update({'password' :session['newpassword']}, { '$set':{ 'data': value}}) #session['newpassword'] = None
 
-            return render_template('final.html' ,change = True)
-            # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
+                return render_template('final.html' ,change = True)
+        except Exception as e:
+            return f'<h1>{{e}}</h1>'
+                # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
 
         else:#new data / password 
-            coded.insert_one({'time': curr_date() ,'password' :session['newpassword'],'data': value  } )
-            # store_password.clear
-            # session['newpassword'] = None
-            return render_template('final.html' ,change = False)
-
+            try:
+                coded.insert_one({'time': curr_date() ,'password' :session['newpassword'],'data': value  } )
+                # store_password.clear
+                # session['newpassword'] = None
+                return render_template('final.html' ,change = False)
+            except Exception as e:
+                return f'<h1>{{e}}</h1>'
 
     return 'get <a href="/"><button> Go back </button></a>'
 
@@ -111,5 +118,10 @@ def feedback():
         return render_template('feedback.html', change=result)
     return redirect('/')
     
+@app.errorhandler(Exception)
+def erroe(e):
+    return f'<h1>{{e}}</h1>'
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
