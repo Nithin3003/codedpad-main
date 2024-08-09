@@ -98,7 +98,7 @@ def display_newdata():
 
                 return render_template('final.html' ,change = True)
         except Exception as e:
-            return f'<h1>{{e}}</h1>'
+            return '<h1>Internal servar error</h1>'
                 # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
 
         else:#new data / password 
@@ -108,7 +108,7 @@ def display_newdata():
                 # session['newpassword'] = None
                 return render_template('final.html' ,change = False)
             except Exception as e:
-                return f'<h1>{{e}}</h1>'
+                return '<h1>Internal servar error</h1>'
 
     return 'get <a href="/"><button> Go back </button></a>'
 
@@ -120,9 +120,9 @@ def feedback():
         return render_template('feedback.html', change=result)
     return redirect('/')
     
-# @app.errorhandler(Exception)
-# def erroe(e):
-#     return '<h1>Internal servar error</h1>'
+@app.errorhandler(Exception)
+def erroe(e):
+    return '<h1>Internal servar error</h1>'
 
 
 if __name__ == "__main__":
