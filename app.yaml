@@ -9,6 +9,7 @@ handlers:
   script: auto
 
 env_variables:
-  mail :'30nithinms@gmail.com'
-  url:"mongodb+srv://msnithin84:Nithin@cluster0.wob2cfi.mongodb.net/coded"
+  mail: "30nithinms@gmail.com"
+  url: "mongodb+srv://msnithin84:Nithin@cluster0.wob2cfi.mongodb.net/coded"
+
   

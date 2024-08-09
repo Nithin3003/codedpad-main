@@ -9,7 +9,7 @@ from datetime import datetime
 import os
 app= Flask(__name__) 
 
-
+# offical hosted 1
 app.config['MONGO_URI'] = os.environ.get('url')
 app.config['SECRET_KEY'] = token_urlsafe(32)
 
