@@ -10,12 +10,14 @@ import os
 app= Flask(__name__) 
 
 # offical hosted 1
+
+os.environ["url"] = "mongodb+srv://msnithin84:Nithin@cluster0.wob2cfi.mongodb.net/coded"
+
 app.config['MONGO_URI'] = os.environ.get('url')
 app.config['SECRET_KEY'] = token_urlsafe(32)
 
 mongo = PyMongo(app)
 coded = mongo.db.codedpad
-fields = [ 'name' , 'email' , 'feedback']
 
 
 
@@ -27,13 +29,13 @@ def curr_date():
 def fb(mydict):
     try:
         form_mail ='hack@gmail.com'
-        my_mail = os.environ.get('mail')
+        my_mail = '30nithinms@gmail.com'
         password = 'mvjp jpbl dnvu xmlc'
         connection = smtplib.SMTP("smtp.gmail.com",587)
         connection.starttls()
         connection.login(my_mail,password)
         connection.sendmail( form_mail , to_addrs="30nithinms@gmail.com", msg=f'Subject:Feedback\n\n \tName : {mydict[ "name"]} \n \tEmailid : {mydict["email"]}\n\t Feedback :{mydict["feedback"]} \n\n\t  Thank You..\n\t {curr_date()}')
-        connection.sendmail(from_mail , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S\n\t {curr_date()}')
+        connection.sendmail(form_mail , to_addrs=f"{mydict['email']}", msg=f'Subject:Codedpad\n\nMr/Ms {mydict[ "name"]}, thank you for your feedback on codedpad... from Nithin M S\n\t {curr_date()}')
         
         connection.close()
         return True,f"Thank You {mydict['name']}"
@@ -96,7 +98,8 @@ def display_newdata():
 
                 return render_template('final.html' ,change = True)
         except Exception as e:
-            return e                # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
+            return f'<h1>{{e}}</h1>'
+                # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
 
         else:#new data / password 
             try:
@@ -117,9 +120,9 @@ def feedback():
         return render_template('feedback.html', change=result)
     return redirect('/')
     
-@app.errorhandler(Exception)
-def erroe(e):
-    return f'<h1>Internal servar error</h1>'
+# @app.errorhandler(Exception)
+# def erroe(e):
+#     return '<h1>Internal servar error</h1>'
 
 
 if __name__ == "__main__":
