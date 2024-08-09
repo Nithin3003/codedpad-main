@@ -96,8 +96,7 @@ def display_newdata():
 
                 return render_template('final.html' ,change = True)
         except Exception as e:
-            return f'<h1>{{e}}</h1>'
-                # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
+            return e                # newdata = coded.insert_one({'password' :session['newpassword'],'data': value  } )
 
         else:#new data / password 
             try:
@@ -120,7 +119,7 @@ def feedback():
     
 @app.errorhandler(Exception)
 def erroe(e):
-    return f'<h1>{{e}}</h1>'
+    return f'<h1>Internal servar error</h1>'
 
 
 if __name__ == "__main__":
