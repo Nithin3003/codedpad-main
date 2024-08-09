@@ -1,4 +1,5 @@
 runtime: python311
+service: codedpad-main
 handlers:
 
 - url: /static
