@@ -96,8 +96,7 @@ a:hover {
 
 form div textarea {
     font-weight: 500;
-    font-size: 1rem;
-    overflow-y: hidden; /* Hide the vertical scrollbar */
+    font-size: 1rem; /* Hide the vertical scrollbar */
     width: 70vw;
     color: rgb(252, 250, 250);
     padding: 2rem;
