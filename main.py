@@ -88,7 +88,7 @@ def display_data():
 
 
 @app.route('/final', methods=['POST', 'GET'] )
-def display_newdata():
+def display_newdata(value=False):
     if request.method =='POST':
         value = request.form['data']
         old_data  =check_newdata()
@@ -127,3 +127,4 @@ def erroe(e):
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
+    
