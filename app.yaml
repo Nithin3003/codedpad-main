@@ -1,6 +1,5 @@
 runtime: python311
 service: codedpad-main
-module: default
 
 handlers:
 
