@@ -1,5 +1,7 @@
 runtime: python311
 service: codedpad-main
+module: default
+
 handlers:
 
 - url: /static
@@ -7,7 +9,7 @@ handlers:
 
 
 - url: /.*
-  script: auto
+  script: main.py
 
 env_variables:
   mail: "30nithinms@gmail.com"
